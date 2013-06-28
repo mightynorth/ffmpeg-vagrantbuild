@@ -56,7 +56,7 @@ sudo make install
 popd
 
 pushd ffmpeg-1.2.1
-PKG_CONFIG_PATH="$HERE/ffmpeg_build/lib/pkgconfig" ./configure --extra-cflags="-I$HOME/ffmpeg_build/include" --extra-ldflags="-L$HOME/ffmpeg_build/lib" --extra-libs="-ldl" --enable-avfilter --enable-libmp3lame --arch=x86_64 --enable-libfaac --enable-filter=movie --enable-filter=overlay --enable-libx264 --enable-gpl --enable-nonfree --enable-zlib --enable-libfdk_aac 
+PKG_CONFIG_PATH="$HERE/ffmpeg_build/lib/pkgconfig" ./configure --extra-cflags="-I$HERE/ffmpeg_build/include" --extra-ldflags="-L$HERE/ffmpeg_build/lib" --extra-libs="-ldl" --bindir="$HERE/bin" --enable-avfilter --enable-libmp3lame --arch=x86_64 --enable-libfaac --enable-filter=movie --enable-filter=overlay --enable-libx264 --enable-gpl --enable-nonfree --enable-zlib --enable-libfdk_aac 
 make
 popd
 
