@@ -14,9 +14,7 @@ Vagrant.configure("2") do |config|
   config.vm.box_url = "http://tag1consulting.com/files/centos-5.8-x86-64-minimal.box"
 
   Vagrant::Config.run do |config|
-    config.vm.provision :shell, :inline => "bash /vagrant/INSTALL.txt; sudo cp /ff_sources/ffmpeg-1.2.1/ffprobe /vagrant/ffprobe-1-2-1-linux; sudo cp /ff_sources/ffmpeg-1.2.1/ffmpeg /vagrant/ffmpeg-1-2-1-linux"
+    config.vm.provision :shell, path => "INSTALL.txt"
   end
-
-
 
 end

@@ -1,6 +1,6 @@
-#
+#!/bin/bash
+
 # The following commands can be used to build a static version of Ffmpeg, including required external libraries.
-#
 
 # install necessary build tools
 sudo yum -y install autoconf automake gcc gcc-c++ git libtool make nasm pkgconfig zlib-devel
@@ -60,3 +60,8 @@ PKG_CONFIG_PATH="$HERE/ffmpeg_build/lib/pkgconfig" ./configure --extra-cflags="-
 make
 popd
 
+$HERE/ff_sources/ffmpeg-1.2.1/ffmpeg
+$HERE/ff_sources/ffmpeg-1.2.1/ffprobe
+
+sudo mv $HERE/ff_sources/ffmpeg-1.2.1/ffmpeg /vagrant/ffmpeg-1-2-1-linux
+sudo mv $HERE/ff_sources/ffmpeg-1.2.1/ffprobe /vagrant/ffprobe-1-2-1-linux
