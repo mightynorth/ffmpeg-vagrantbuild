@@ -63,5 +63,10 @@ popd
 $HERE/ff_sources/ffmpeg-1.2.1/ffmpeg
 $HERE/ff_sources/ffmpeg-1.2.1/ffprobe
 
-sudo mv $HERE/ff_sources/ffmpeg-1.2.1/ffmpeg /vagrant/ffmpeg-1-2-1-linux
-sudo mv $HERE/ff_sources/ffmpeg-1.2.1/ffprobe /vagrant/ffprobe-1-2-1-linux
+if [ -d /vagrant]; then 
+  sudo mv $HERE/ff_sources/ffmpeg-1.2.1/ffmpeg /vagrant/ffmpeg-1-2-1-linux
+  sudo mv $HERE/ff_sources/ffmpeg-1.2.1/ffprobe /vagrant/ffprobe-1-2-1-linux
+else
+  sudo mv $HERE/ff_sources/ffmpeg-1.2.1/ffmpeg ./ffmpeg-1-2-1-linux
+  sudo mv $HERE/ff_sources/ffmpeg-1.2.1/ffprobe ./ffprobe-1-2-1-linux
+fi
