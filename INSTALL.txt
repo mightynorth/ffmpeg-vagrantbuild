@@ -1,0 +1,62 @@
+#
+# The following commands can be used to build a static version of Ffmpeg, including required external libraries.
+#
+
+# install necessary build tools
+sudo yum -y install autoconf automake gcc gcc-c++ git libtool make nasm pkgconfig zlib-devel
+
+HERE=`pwd`
+
+mkdir ff_sources
+pushd ff_sources
+
+wget http://downloads.sourceforge.net/project/faac/faac-src/faac-1.28/faac-1.28.tar.gz
+wget http://downloads.sourceforge.net/project/lame/lame/3.99/lame-3.99.5.tar.gz
+wget http://sourceforge.net/projects/opencore-amr/files/fdk-aac/fdk-aac-0.1.1.tar.gz/download
+wget http://ftp.videolan.org/pub/x264/snapshots/last_x264.tar.bz2
+wget http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz
+wget http://ffmpeg.org/releases/ffmpeg-1.2.1.tar.gz
+
+tar -xzvf faac-1.28.tar.gz
+tar -xzvf lame-3.99.5.tar.gz
+tar -xzvf fdk-aac-0.1.1.tar.gz 
+tar -xjvflast_x264.tar.bz2
+tar -xzvf last_x264.tar
+tar -xzvf yasm-1.2.0.tar.gz
+tar -xzvf ffmpeg-1.2.1.tar.gz
+
+pushd faac-1.28
+./configure --enable-static --disable-shared --prefix="$HERE/ffmpeg_build" --bindir="$HERE/bin"
+make
+sudo make install
+popd
+
+pushd lame-3.99.5
+./configure --enable-static --disable-shared --prefix="$HERE/ffmpeg_build" --bindir="$HERE/bin"
+make
+sudo make install
+popd
+
+pushd fdk-aac-0.1.1
+./configure --enable-static --disable-shared --prefix="$HERE/ffmpeg_build" --bindir="$HERE/bin"
+make
+sudo make install
+popd
+
+pushd yasm-1.2.0/
+./configure --prefix="$HERE/ffmpeg_build" --bindir="$HERE/bin"
+make
+sudo make install
+popd
+
+pushd x264-snapshot-20*-2245/
+./configure --enable-static --prefix="$HERE/ffmpeg_build" --bindir="$HERE/bin"
+make
+sudo make install
+popd
+
+pushd ffmpeg-1.2.1
+PKG_CONFIG_PATH="$HERE/ffmpeg_build/lib/pkgconfig" ./configure --extra-cflags="-I$HOME/ffmpeg_build/include" --extra-ldflags="-L$HOME/ffmpeg_build/lib" --extra-libs="-ldl" --enable-avfilter --enable-libmp3lame --arch=x86_64 --enable-libfaac --enable-filter=movie --enable-filter=overlay --enable-libx264 --enable-gpl --enable-nonfree --enable-zlib --enable-libfdk_aac 
+make
+popd
+
